@@ -43,3 +43,8 @@ target_compile_features(test_cpp17 PRIVATE cxx_std_17)
 jm_add_test(test_split tests/split_defs.cpp)
 
 jm_add_test(test_derived)
+
+jm_add_test(test_error)
+jm_add_test(test_diagnostics)
+# JSON_DIAGNOSTICS 带 ABI tag，必须对整个 target（所有 TU）一致定义
+target_compile_definitions(test_diagnostics PRIVATE JSON_DIAGNOSTICS=1)
