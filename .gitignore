@@ -1,0 +1,15 @@
+# CMake / 构建产物
+build/
+build-*/
+cmake-build-*/
+out/
+compile_commands.json
+# IDE
+.vs/
+.vscode/
+.idea/
+*.user
+# 编译中间产物
+*.o
+*.obj
+*.pdb
