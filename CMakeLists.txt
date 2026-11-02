@@ -48,3 +48,9 @@ jm_add_test(test_error)
 jm_add_test(test_diagnostics)
 # JSON_DIAGNOSTICS 带 ABI tag，必须对整个 target（所有 TU）一致定义
 target_compile_definitions(test_diagnostics PRIVATE JSON_DIAGNOSTICS=1)
+
+add_executable(example_header_only examples/example_header_only.cpp)
+target_link_libraries(example_header_only PRIVATE jm::jsonutils)
+
+add_executable(example_split examples/example_split.cpp examples/json_mappings.cpp)
+target_link_libraries(example_split PRIVATE jm::jsonutils)
