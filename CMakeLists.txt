@@ -41,3 +41,5 @@ jm_add_test(test_cpp17)
 target_compile_features(test_cpp17 PRIVATE cxx_std_17)
 
 jm_add_test(test_split tests/split_defs.cpp)
+
+jm_add_test(test_derived)
