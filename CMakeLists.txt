@@ -32,3 +32,4 @@ function(jm_add_test name)
 endfunction()
 
 jm_add_test(test_smoke)
+jm_add_test(test_alias)
