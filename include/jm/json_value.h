@@ -55,3 +55,6 @@ struct adl_serializer<std::optional<T>>
 };
 #endif
 } // namespace nlohmann
+
+// 内部检测宏仅服务于本头文件，不泄漏到消费者命名空间。
+#undef JM_DETAIL_HAS_CPP17
