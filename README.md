@@ -48,6 +48,8 @@ auto back = jd.get<std::map<std::string, std::vector<User>>>();
 - 单次 1..63 个字段；空 struct 不应使用宏
 - 分离模式（声明 + cpp 定义）仅支持双向 codec；单向 codec 请用 `_INLINE` 宏或手写声明
 - `JM_DECLARE_JSON` 在类型头中展开时只需 `#include <jm/json_fwd.h>`（轻量）；引 `<jm/json.h>` 同样可用
+- 同一程序内不要混用 C++14 与 C++17 编译单元：`std::optional` 特化按 TU 语言模式条件启用，
+  混编会导致不同 TU 看到的特化不一致（nlohmann 本身也不建议混编）
 
 ## 宏一览（共 9 个）
 
@@ -83,9 +85,10 @@ auto back = jd.get<std::map<std::string, std::vector<User>>>();
 
 - 基础类型、嵌套结构体：宏 + ADL 自动
 - `std::vector` / `std::map` / `std::list` 等容器、`std::pair`（二元数组）：nlohmann 内置
-- 枚举（`enum` / `enum class`）：nlohmann 内置按底层整数转换
-  （`JSON_DISABLE_ENUM_SERIALIZATION` 默认启用）
-- `std::optional`：C++17 及以上编译模式自动启用（按 `__cplusplus` / `_MSVC_LANG` 检测）
+- 枚举（`enum` / `enum class`）：nlohmann 内置按底层整数转换；定义
+  `JSON_DISABLE_ENUM_SERIALIZATION=1` 可关闭该支持（关闭后本库枚举字段将无法序列化）
+- `std::optional`：C++17 及以上编译模式自动启用（按标准语言模式宏检测：
+  `__cplusplus`、`_MSVC_LANG`，MSVC STL 下另含 `_HAS_CXX17`）
 - 智能指针（`std::shared_ptr` / `std::unique_ptr`）：nlohmann 不内置，需要时手写 codec
 
 ## 构建与测试
@@ -114,6 +117,17 @@ ctest --test-dir build -C Debug --output-on-failure
 ```bash
 ./build/example_header_only
 ./build/example_split
+```
+
+## 编辑器配置（clangd）
+
+`Ctrl+Click` / `F12` 跳转由 clangd 提供，扩展已在 `.vscode/extensions.json` 中推荐。
+clangd 可执行文件路径属于本机配置（用户设置 `clangd.path`、PATH，或由扩展提示下载），
+不入库；工作区设置只固定编译数据库位置。
+
+```powershell
+# Windows：在 “Developer PowerShell for VS” 中执行；Linux 任意终端
+cmake --preset clangd
 ```
 
 ## 离线与依赖
