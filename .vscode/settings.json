@@ -1,8 +1,9 @@
 {
-    // C++ 跳转 / 补全由 clangd 提供（扩展见 extensions.json）。
-    // clangd 可执行文件路径与机器相关，放在用户设置 clangd.path，
-    // 或让它出现在 PATH、由扩展提示下载；不要写进仓库。
-    "clangd.arguments": [
-        "--compile-commands-dir=${workspaceFolder}/build-clangd"
-    ]
+  // C++ 跳转 / 补全由 clangd 提供（扩展见 extensions.json）。
+  // clangd 可执行文件路径与机器相关，放在用户设置 clangd.path，
+  // 或让它出现在 PATH、由扩展提示下载；不要写进仓库。
+  "clangd.arguments": [
+    "--compile-commands-dir=${workspaceFolder}/build-clangd"
+  ],
+  "python.terminal.activateEnvironment": false
 }
