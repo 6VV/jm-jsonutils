@@ -6,8 +6,12 @@ out/
 compile_commands.json
 # IDE
 .vs/
-.vscode/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
 .idea/
+.trae/
+.screenshots/
 *.user
 # 编译中间产物
 *.o
