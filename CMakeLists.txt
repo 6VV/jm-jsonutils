@@ -36,3 +36,6 @@ jm_add_test(test_alias)
 jm_add_test(test_enum)
 jm_add_test(test_basic)
 jm_add_test(test_macro_modes)
+
+jm_add_test(test_cpp17)
+target_compile_features(test_cpp17 PRIVATE cxx_std_17)
