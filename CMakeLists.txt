@@ -33,3 +33,4 @@ endfunction()
 
 jm_add_test(test_smoke)
 jm_add_test(test_alias)
+jm_add_test(test_enum)
